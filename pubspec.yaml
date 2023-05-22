@@ -1,0 +1,16 @@
+name: repository_url
+description: Alternative `Uri` object for handling Git repository URL format
+version: 1.0.0
+repository: https://github.com/rk0cc/dart_repourl
+topics:
+  - url
+  - uri
+  - repository
+  - git
+funding:
+  - https://github.com/sponsors/rk0cc
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+dev_dependencies:
+  lints: any
+  test: ^1.24.3
