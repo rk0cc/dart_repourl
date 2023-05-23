@@ -106,9 +106,9 @@ abstract final class RepositoryUrl {
   }
 
   /// Get a [RepositoryUrl] from given [uri].
-  /// 
+  ///
   /// [FormatException] will be thrown if:
-  /// 
+  ///
   /// * Applied unsupported [scheme] in [Uri.scheme]
   /// * Contains [Uri.fragment] or [Uri.query]
   /// * [Uri] is not absolute
@@ -128,7 +128,7 @@ abstract final class RepositoryUrl {
   }
 
   /// Construct [RepositoryUrl] in alternative SSH URL format.
-  /// 
+  ///
   /// [FormatException] thrown if given [path] is invalid.
   factory RepositoryUrl.altSsh(
       {required String userInfo, required String host, String path = ""}) {
@@ -140,7 +140,7 @@ abstract final class RepositoryUrl {
   }
 
   /// Return to corresponded structure of [RepositoryUrl] in [String].
-  /// 
+  ///
   /// If [RepositoryUrl] is created by [RepositoryUrl.new], it should be
   /// returned exact same [String] from parameter.
   @override
@@ -214,7 +214,7 @@ final class _AltSshUrl implements RepositoryUrl {
   int? get port => null;
 
   @override
-  String get path => pathSegment.join("/");
+  String get path => ":${pathSegment.join("/")}";
 
   /// [RegExp] for validating structure of alternative SSH URL.
   static final RegExp regex = RegExp(
@@ -232,9 +232,7 @@ final class _AltSshUrl implements RepositoryUrl {
       ..write(host);
 
     if (pathSegment.isNotEmpty) {
-      buf
-        ..write(":")
-        ..write(path);
+      buf.write(path);
     }
 
     return buf.toString();
