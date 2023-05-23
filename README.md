@@ -3,6 +3,7 @@
 <p align="center">
     <a href="https://pub.dev/packages/repository_url"><img src="https://img.shields.io/pub/v/repository_url?color=%2333FF33&label=Latest%20version%3A&style=flat-square" alt="Pub version"/></a>
     <a href="https://github.com/sponsors/rk0cc"><img alt="GitHub Sponsors" src="https://img.shields.io/github/sponsors/rk0cc?color=%2333FF33&style=flat-square"></a>
+    <a href="https://github.com/rk0cc/dart_repourl/actions/workflows/dart.yml"><img alt="Unit test" src="https://github.com/rk0cc/dart_repourl/actions/workflows/dart.yml/badge.svg"/></a>
 </p>
 
 There are various format of URL can be applied for fetching Git repository.
