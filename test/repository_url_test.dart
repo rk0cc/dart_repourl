@@ -3,9 +3,17 @@ import 'package:test/test.dart';
 
 void main() {
   test("Stringify object", () {
-    expect(RepositoryUrl.fromUri(Uri.https("example.com", "bob/project.git")).toString(), "https://example.com/bob/project.git");
-    expect(RepositoryUrl.altSsh(
-      userInfo: "alice", host: "example.com", path: "sample/projec.git").toString(), "alice@example.com:sample/projec.git");
+    expect(
+        RepositoryUrl.fromUri(Uri.https("example.com", "bob/project.git"))
+            .toString(),
+        "https://example.com/bob/project.git");
+    expect(
+        RepositoryUrl.altSsh(
+                userInfo: "alice",
+                host: "example.com",
+                path: "sample/projec.git")
+            .toString(),
+        "alice@example.com:sample/projec.git");
   });
   group("Parse from string", () {
     test("Uri adapter", () {
@@ -25,8 +33,12 @@ void main() {
       expect(asu.scheme, isNull);
     });
     test("invalid thrown", () {
-      expect(() => RepositoryUrl("http://gitdummy.test/agwun/spam.git?updated=86400"), throwsFormatException);
-      expect(() => RepositoryUrl("http://gitdummy.test/bgwun/spam.git#secured"), throwsFormatException);
+      expect(
+          () => RepositoryUrl(
+              "http://gitdummy.test/agwun/spam.git?updated=86400"),
+          throwsFormatException);
+      expect(() => RepositoryUrl("http://gitdummy.test/bgwun/spam.git#secured"),
+          throwsFormatException);
       expect(() => RepositoryUrl(r"C:\\path\to\repo"), throwsFormatException);
       expect(() => RepositoryUrl(r"$HOME\repo"), throwsFormatException);
     });
