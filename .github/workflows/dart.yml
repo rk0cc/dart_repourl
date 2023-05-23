@@ -1,0 +1,27 @@
+name: Unit test
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - lib/**.dart
+      - test/**.dart
+      - .github/workflows/dart.yml
+  pull_request:
+    branches:
+      - main
+jobs:
+  testing:
+    name: Dart test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Load Dart action
+        uses: dart-lang/setup-dart@v1
+        with:
+          sdk: stable
+      - name: Get dependencies
+        run: dart pub get
+      - name: Run test
+        run: dart test
