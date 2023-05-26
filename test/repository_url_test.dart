@@ -41,6 +41,7 @@ void main() {
           throwsFormatException);
       expect(() => RepositoryUrl(r"C:\\path\to\repo"), throwsFormatException);
       expect(() => RepositoryUrl(r"$HOME\repo"), throwsFormatException);
+      expect(() => RepositoryUrl(r"file:///home/user/repo"), returnsNormally);
     });
   });
 }
