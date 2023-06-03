@@ -81,16 +81,8 @@ abstract final class RepositoryUrl {
         // Alternative SSH URL
         (
           _AltSshUrl.regex,
-          (match) {
-            final path = match.group(3);
-
-            return _AltSshUrl(
-                match.group(1)!,
-                match.group(2)!,
-                path == null
-                    ? const <String>[]
-                    : UnmodifiableListView(path.split("/")));
-          }
+          (match) => _AltSshUrl(match.group(1)!, match.group(2)!,
+              UnmodifiableListView(match.group(3)!.split("/")))
         )
       ];
 
@@ -131,7 +123,7 @@ abstract final class RepositoryUrl {
   ///
   /// [FormatException] thrown if given [path] is invalid.
   factory RepositoryUrl.altSsh(
-      {required String userInfo, required String host, String path = ""}) {
+      {required String userInfo, required String host, required String path}) {
     if (!path.contains(RegExp("[-a-zA-Z0-9()_.//]*"))) {
       throw FormatException("Invalid path parsed", path);
     }
@@ -218,22 +210,20 @@ final class _AltSshUrl implements RepositoryUrl {
 
   /// [RegExp] for validating structure of alternative SSH URL.
   static final RegExp regex = RegExp(
-      r"^([a-zA-Z][-a-zA-Z0-9._]{0,29})@([-a-zA-Z0-9._]{1,256}\.[a-zA-Z0-9()]{1,6}):([-a-zA-Z0-9()_.//]*)$");
+      r"^([a-zA-Z][-a-zA-Z0-9._]{0,29})@([-a-zA-Z0-9._]{1,256}\.[a-zA-Z0-9()]{1,6}):([-a-zA-Z0-9()_.//]+)$");
 
   _AltSshUrl(this.userInfo, this.host, this.pathSegment)
       : assert(userInfo.isNotEmpty),
-        assert(host.isNotEmpty);
+        assert(host.isNotEmpty),
+        assert(pathSegment.isNotEmpty);
 
   @override
   String toString() {
     StringBuffer buf = StringBuffer()
       ..write(userInfo)
       ..write("@")
-      ..write(host);
-
-    if (pathSegment.isNotEmpty) {
-      buf.write(path);
-    }
+      ..write(host)
+      ..write(path);
 
     return buf.toString();
   }
