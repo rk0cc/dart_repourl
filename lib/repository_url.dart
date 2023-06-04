@@ -133,7 +133,8 @@ abstract final class RepositoryUrl {
       throw FormatException("Invalid path parsed", path);
     }
 
-    return _AltSshUrl(userInfo, host, UnmodifiableListView(actualPath.split("/")));
+    return _AltSshUrl(
+        userInfo, host, UnmodifiableListView(actualPath.split("/")));
   }
 
   /// Return to corresponded structure of [RepositoryUrl] in [String].
